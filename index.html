@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Urban Stories</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    @font-face {
+      font-family: 'Gulax';
+      src: url('fonts/Gulax-Regular.otf') format('opentype');
+      font-display: swap;
+    }
+    .site-title {
+      position:fixed;
+      top:12px;
+      left:50%;
+      transform:translateX(-50%);
+      z-index:1000;
+      margin:0;
+      padding:6px 14px 8px;
+      font-family:'Gulax', Arial, sans-serif;
+      font-size: clamp(32px, 6vw, 64px);
+      letter-spacing:2px;
+      color:#FFFFFF;
+      text-transform:none;
+      user-select:none;
+      white-space:nowrap;
+      text-shadow:0 -1px 4px #FFFFFF, 0 -2px 10px #ffff00, 0 -10px 20px #ff8000, 0 -18px 40px #FF0000;
+    }
+    @media (max-width:700px){
+      .site-title{font-size:clamp(20px,6vw,34px);padding:4px 12px;}
+    }
+  </style>
+</head>
+<body>
+  <h1 class="site-title">A website with public restroom</h1>
+  <div id="restroom-container">
+    <!-- Centered background image / viewport still image -->
+    <img id="restroom-bg" src="assets/background01.png" alt="restroom background" />
+    
+    <!-- Floating arrows -->
+    <div class="arrow-container" id="arrow1" style="left: 25%; top: 70%;">
+      <div class="arrow up"></div>
+    </div>
+    <div class="arrow-container" id="arrow2" style="left: 50%; top: 70%;">
+      <div class="arrow up"></div>
+    </div>
+    <div class="arrow-container toilet-arrow" id="arrow3" style="left: 75%; top: 70%;">
+      <div class="arrow up"></div>
+    </div>
+
+    <!-- Foreground centered text that acts as the mirror portal -->
+    <div id="mirror-portal" class="text-portal">
+      <div id="portal-text">Enter the Mirror</div>
+      <div id="portal-overlay">see yourself</div>
+    </div>
+
+    <!-- Mirror overlay that fades in and contains video -->
+    <div id="mirror-overlay">
+      <video id="mirror-video" autoplay playsinline style="display:none"></video>
+      <!-- processed canvas that shows filtered webcam frames -->
+      <canvas id="mirror-canvas" width="1920" height="1080"></canvas>
+      <div id="mirror-text">Mirror activated</div>
+      <div id="controls" aria-hidden="true">
+        <label>Saturation <input id="saturation" type="range" min="0" max="3" step="0.05" value="1"></label>
+        <label>Contrast <input id="contrast" type="range" min="0" max="3" step="0.05" value="1"></label>
+        <label>Brightness <input id="brightness" type="range" min="0" max="2" step="0.01" value="1"></label>
+        <label>Blur <input id="blur" type="range" min="0" max="10" step="0.5" value="0"></label>
+        <label>Grain <input id="grain" type="range" min="0" max="1" step="0.01" value="0"></label>
+        <label>Sharpen <input id="sharpen" type="checkbox"></label>
+      </div>
+      <div id="click-hint" aria-hidden="false" style="display:block;position:absolute;bottom:80px;left:50%;transform:translateX(-50%);color:#ffef60;font-size:18px;letter-spacing:1px;opacity:1;font-family:'FacadeSud',Arial,sans-serif;font-style:italic;">click the mirror to return</div>
+      <button id="continue-btn" aria-hidden="true">Continue</button>
+    </div>
+    <!-- confetti canvas (playful particles) -->
+    <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
